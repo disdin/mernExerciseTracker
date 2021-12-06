@@ -24,7 +24,9 @@ const usersRouter=require('./routes/users');
 app.use('/exercises',exersisesRouter);  // basically we are binding these urls with the corresponding routers
 app.use('/users', usersRouter);
 
-
+if(process.env.NODE_ENV==='production'){
+    app.use(express.static('client/build'))
+}
 app.listen(port, ()=> {
     console.log(`server is running at ${port}`);
 });
