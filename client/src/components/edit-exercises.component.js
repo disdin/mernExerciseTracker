@@ -4,6 +4,9 @@ import DatePicker from 'react-datepicker';
 import { useLocation } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
+
+const url='';
+
 const EditExercise=()=>{
     const [username, setUserName] = useState('');
     const [description, setDescription] = useState('');
@@ -16,7 +19,7 @@ const EditExercise=()=>{
 
     useEffect(() => {
         
-        axios.get('http://localhost:5000/exercises/'+editid)
+        axios.get(`${url}/exercises/`+editid)
             .then(res=>{
                 setUserName(res.data.username);
                 setDescription(res.data.description);
@@ -25,7 +28,7 @@ const EditExercise=()=>{
             })
             .catch(err=>console.log(err));
 
-        axios.get('http://localhost:5000/users/')
+        axios.get(`${url}/users/`)
         .then(response => {
             if (response.data.length > 0) {
                 setUsers(response.data.map(user => user.username)) 
@@ -46,7 +49,7 @@ const EditExercise=()=>{
             date: date
         }
         console.log(exercise);
-        axios.post('http://localhost:5000/exercises/update/'+editid,exercise)
+        axios.post(`${url}/exercises/update/`+editid,exercise)
             .then(res=>console.log(res.data))
             .catch(err=> console.log(err));
         window.location= '/';

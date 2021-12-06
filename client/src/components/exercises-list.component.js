@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const url='';
+
 const Exercise = (props) => 
   (
     <tr>
@@ -21,7 +23,7 @@ const ExerciseList = () => {
   
   const getExercises=async()=>{
      try{
-      const response=await fetch('http://localhost:5000/exercises');
+      const response=await fetch(`${url}/exercises`);
       setExercises(await response.json())
      }
      catch(err){
@@ -40,7 +42,7 @@ const ExerciseList = () => {
     //   .catch((err) => console.log(err));
   },[]);
   const deleteExercise = (id) => {
-    axios.delete("http://localhost:5000/exercises/" + id).then((response) => {
+    axios.delete(`${url}/exercises/` + id).then((response) => {
       console.log(response.data);
     });
     setExercises(exercises.filter((ex) => ex._id !== id));
